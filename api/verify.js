@@ -1,23 +1,12 @@
-import express from "express";
-const app = express();
+export default function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-app.use(express.json());
+  if (req.method === 'OPTIONS') return res.status(204).end();
 
-// Эндпоинт для Pelinda / Panda V3
-app.all("/v3_validate", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
-  if (req.method === "OPTIONS") return res.status(204).end();
-
-  // Можно логировать тело запроса для отладки
-  // console.log("Pelinda request body:", req.body);
-
-  // Всегда возвращаем успех
+  // Любой запрос получает "validated!!"
   res.status(200).json({
     status: "validated!!"
   });
-});
-
-app.listen(3000, () => console.log("✅ Pelinda mock server running on port 3000"));
+}
