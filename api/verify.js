@@ -1,3 +1,5 @@
-export default function handler(req, res) {
-  res.status(200).json({ "V2_Authentication": "success" });
+export default function handler(request, response) {
+  response.status(200).json({
+    "V2_Authentication": "success"
+  });
 }
